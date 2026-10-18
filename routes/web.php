@@ -47,7 +47,10 @@ Route::middleware('auth')->group(function () {
         // Rizka: daftar mata kuliah (read-only)
         Route::resource('courses', MahasiswaCourseController::class)->only(['index', 'show']);
 
-        // Velix: CRUD Tugas (tambah route ubah status di sini)
+                // Velix: CRUD Tugas (tambah route ubah status di sini)
         Route::resource('tasks', TaskController::class);
+
+        Route::patch('/tasks/{id}/status', [TaskController::class, 'updateStatus'])
+            ->name('tasks.updateStatus');
     });
 });

@@ -32,7 +32,10 @@
                     <i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
                 <a class="nav-link {{ request()->routeIs('admin.courses.*') ? 'active' : '' }}" href="{{ route('admin.courses.index') }}">
                     <i class="bi bi-book me-2"></i>Mata Kuliah</a>
-                {{-- Fahmi: tambah menu Mahasiswa & Semua Tugas di sini --}}
+                <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
+                    <i class="bi bi-people me-2"></i>Mahasiswa</a>
+                <a class="nav-link {{ request()->routeIs('admin.tasks.*') ? 'active' : '' }}" href="{{ route('admin.tasks.index') }}">
+                    <i class="bi bi-list-check me-2"></i>Semua Tugas</a>
             </nav>
         @else
             <div class="menu-title">Menu Mahasiswa</div>

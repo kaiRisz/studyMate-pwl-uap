@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
+use App\Http\Controllers\Admin\TaskController as AdminTaskController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Mahasiswa\CourseController as MahasiswaCourseController;
@@ -37,7 +39,9 @@ Route::middleware('auth')->group(function () {
         // Rizka: CRUD Mata Kuliah
         Route::resource('courses', AdminCourseController::class);
 
-        // Fahmi: tambah route daftar mahasiswa & semua tugas di sini
+        // Fahmi: daftar mahasiswa & semua tugas (read-only)
+        Route::get('/mahasiswa', [AdminUserController::class, 'index'])->name('users.index');
+        Route::get('/tugas', [AdminTaskController::class, 'index'])->name('tasks.index');
     });
 
     // ===== MAHASISWA =====
@@ -48,6 +52,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('courses', MahasiswaCourseController::class)->only(['index', 'show']);
 
         // Velix: CRUD Tugas (tambah route ubah status di sini)
+        Route::patch('/tasks/{task}/status', [TaskController::class, 'updateStatus'])->name('tasks.status');
         Route::resource('tasks', TaskController::class);
     });
 });
